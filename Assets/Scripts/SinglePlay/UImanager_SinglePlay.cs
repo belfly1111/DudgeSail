@@ -8,7 +8,10 @@ using TMPro;
 public class UImanager_SinglePlay : MonoBehaviour
 {
     public TMP_Text Timer;
+    public TMP_Text Score;
     public GameObject GameOverPanel;
+    public GameObject RankingPanel;
+    public TMP_Text[] RankingText;
 
     public int Time_min = 0;
     public float Time_sec = 0;
@@ -35,12 +38,21 @@ public class UImanager_SinglePlay : MonoBehaviour
 
     public void GameEnd()
     {
+        Score.text = "< Score [ " + Timer.text + " ] >";
         GameOverPanel.GetComponent<Animator>().SetTrigger("MovePanel");
     }
 
     public void Ranking()
     {
         Debug.Log("·©Å· º¸±â");
+        if(RankingPanel.activeSelf)
+        {
+            RankingPanel.SetActive(false);
+        }
+        else
+        {
+            RankingPanel.SetActive(true);
+        }
     }
 
     public void ReStart()
