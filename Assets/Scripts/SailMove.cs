@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class SailMove : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Rigidbody2D RB;
+    SpriteRenderer SR;
+
     void Start()
     {
-        Debug.Log("Hello my Friends!");
+        RB = GetComponent<Rigidbody2D>();
+        SR = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        float axis_width = Input.GetAxisRaw("Horizontal");
+        float axis_length = Input.GetAxisRaw("Vertical");
+
+        if (axis_width != 0)
+        {
+            SR.flipX = axis_width == 1;
+        }
+
+
+        RB.velocity = new Vector2(3 * axis_width,3 * axis_length);
     }
 }
