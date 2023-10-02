@@ -12,11 +12,9 @@ using TMPro;
 
 public class SQlite_DB : MonoBehaviour
 {
-    [Header("HighScore 점수 갱신 관련 변수")]
-    public TMP_Text temp;
-
     [Header("점수 등록을 위한 변수들")]
-    public UImanager_SinglePlay UImanager;
+    public UImanager_SinglePlay UImanager_Single;
+    public UImanager_MultiPlay UImanager_Multi;
     public TMP_InputField UserName_inputField;
 
 
@@ -97,7 +95,9 @@ public class SQlite_DB : MonoBehaviour
         // 버틴 초의 합계가 점수가 된다.
         try
         {
-            int playerScore = ((int)UImanager.Time_sec) + 60 * UImanager.Time_min;
+            int playerScore = 0;
+            if (UImanager_Single != null) playerScore = ((int)UImanager_Single.Time_sec) + 60 * UImanager_Single.Time_min;
+            else if(UImanager_Multi != null) playerScore = ((int)UImanager_Multi.Time_sec) + 60 * UImanager_Multi.Time_min;
 
             InsertQueryDataBase("insert into user_Ranking(ID,SCORE) values(\"" + UserName_inputField.text + "\",\"" + playerScore + "\")");
             DataBaseClose();
@@ -119,11 +119,14 @@ public class SQlite_DB : MonoBehaviour
         while (dataReader.Read())
         {
             if (i >= 10) break;
-            UImanager.RankingText[i].text = "<" + i + "> [NickName : " + dataReader.GetString(0) + "] & [Score : " + dataReader.GetInt32(1) + "]";
+
+            if (UImanager_Single != null) UImanager_Single.RankingText[i].text = "<" + i + "> [NickName : " + dataReader.GetString(0) + "] & [Score : " + dataReader.GetInt32(1) + "]";
+            else if (UImanager_Multi != null) UImanager_Multi.RankingText[i].text = "<" + i + "> [NickName : " + dataReader.GetString(0) + "] & [Score : " + dataReader.GetInt32(1) + "]";
+
             i++;
         }
         DataBaseClose();
-        UImanager.Ranking();
+        UImanager_Single.Ranking();
     }
 
 }

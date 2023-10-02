@@ -20,6 +20,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public GameObject JoinRoom_Button;
     public GameObject GameStart_Button;
 
+    // '1' 이라면 MasterPlayer(빨강) '0' 이라면 Player(파랑)
+    public int PlayerRole = -1;
 
     // 싱글톤 패턴을 이용해 여러 개의 Scene으로 관리하는 다양한 stage로 넘어가도 Pun2 서버 연결을 유지할 수 있도록 한다.
     public static PhotonManager instance;
@@ -57,7 +59,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
         ConnectPhoton();
     }
-
 
     public void ConnectPhoton()
     {
@@ -161,7 +162,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Photon Server 접속 끊김");
     }
-
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         if (PhotonNetwork.PlayerList.Length == 2 && PhotonNetwork.IsMasterClient)
@@ -171,7 +171,4 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             GameStart_Button.SetActive(true);
         }
     }
-
-
-
 }

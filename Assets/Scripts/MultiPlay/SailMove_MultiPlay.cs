@@ -12,12 +12,15 @@ public class SailMove_MultiPlay : MonoBehaviourPun
     Rigidbody2D RB;
     SpriteRenderer SR;
     public PhotonView PV;
+    public UImanager_MultiPlay UImanager_MultiPlay;
+    public int life = 3;
 
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
         SR = GetComponent<SpriteRenderer>();
         PV = GetComponent<PhotonView>();
+        UImanager_MultiPlay = GameObject.Find("UIManager_MultiPlay").GetComponent<UImanager_MultiPlay>();
     }
 
     void Update()
@@ -40,9 +43,9 @@ public class SailMove_MultiPlay : MonoBehaviourPun
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Obstacle")
+        if (collision.tag == "Obstacle" && PV.IsMine)
         {
-            RB.velocity = Vector2.zero;
+            UImanager_MultiPlay.DropHeart();
         }
     }
 

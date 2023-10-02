@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 6780700976096190284}
   - component: {fileID: -1382192180659961637}
   m_Layer: 0
-  m_Name: Sail_2p
-  m_TagString: Untagged
+  m_Name: 2p_Sail
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,3 +188,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PV: {fileID: 0}
+  UImanager_MultiPlay: {fileID: 0}
+  life: 3

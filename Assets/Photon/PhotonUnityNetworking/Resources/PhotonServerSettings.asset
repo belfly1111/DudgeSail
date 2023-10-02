@@ -37,6 +37,18 @@ MonoBehaviour:
   - ClickRpc
   - DestroyRpc
   - FlipXRPC
+  - BulletDispend
+  - BulletDispense
+  - BulletDispenseRPC
+  - DestroyBulletRPC
+  - TargetDesignation
+  - FindSail
+  - DestroyBullet
+  - SpawnShark
+  - DropHeart
+  - DropHeart_1p
+  - DropHeart_2p
+  - GameEnd
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 0
+  DevRegionSetOnce: 1

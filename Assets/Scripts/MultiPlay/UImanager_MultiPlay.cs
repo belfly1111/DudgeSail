@@ -10,22 +10,32 @@ using Photon.Realtime;
 using System.Reflection;
 using UnityEditor;
 
-public class UImanager_MultiPlay : MonoBehaviourPunCallbacks
+public class UImanager_MultiPlay : MonoBehaviourPun
 {
-    public TMP_Text Timer;
-    public TMP_Text Score;
     public GameObject GameOverPanel;
     public GameObject RankingPanel;
+
+    public PhotonView PV;
+    public TMP_Text GameResult;
+    public TMP_Text Timer;
+    public TMP_Text Score;
     public TMP_Text[] RankingText;
+
+    public Image[] Heart_1p;
+    public Image[] Heart_2p;
+
+    public int HeartCount_1p = 0;
+    public int HeartCount_2p = 0;
 
     public int Time_min = 0;
     public float Time_sec = 0;
     public bool GameOver = false;
 
+
     // Update is called once per frame
-/*    void Update()
+    void Update()
     {
-        if(!GameOver)
+        if (!GameOver)
         {
             Time_sec += Time.deltaTime;
             if (Time_sec >= 59)
@@ -35,16 +45,6 @@ public class UImanager_MultiPlay : MonoBehaviourPunCallbacks
             }
             Timer.text = Time_min.ToString() + " : " + Time_sec.ToString("F0");
         }
-        else if(GameOver)
-        {
-            GameEnd();
-        }
-    }*/
-
-    public void GameEnd()
-    {
-        Score.text = "< Score [ " + Timer.text + " ] >";
-        GameOverPanel.GetComponent<Animator>().SetTrigger("MovePanel");
     }
 
     public void Ranking()
@@ -62,7 +62,7 @@ public class UImanager_MultiPlay : MonoBehaviourPunCallbacks
 
     public void ReStart()
     {
-        SceneManager.LoadScene("SinglePlayScene");
+        PhotonNetwork.LoadLevel("MultiPlayScene");
     }
 
     public void BackTitle()
@@ -72,8 +72,49 @@ public class UImanager_MultiPlay : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("StartScene");
     }
 
-    public void GameStart()
+    public void DropHeart()
     {
-        PhotonNetwork.LoadLevel("MultiPlayScene");
+        if(HeartCount_1p == 3 || HeartCount_2p == 3)
+        {
+            PV.RPC("GameEnd", RpcTarget.All);
+        }
+
+        // MasterPlayer == »¡°­
+        else if(PhotonManager.instance.PlayerRole == 1)
+        {
+            PV.RPC("DropHeart_1p", RpcTarget.All);
+        }
+        // Player == ÆÄ¶û
+        else if(PhotonManager.instance.PlayerRole == 0)
+        {
+            PV.RPC("DropHeart_2p", RpcTarget.All);
+        }
     }
+
+    [PunRPC]
+    public void DropHeart_1p()
+    {
+        Destroy(Heart_1p[HeartCount_1p]);
+        HeartCount_1p++;
+    }
+
+    [PunRPC]
+    public void DropHeart_2p()
+    {
+        Destroy(Heart_2p[HeartCount_2p]);
+        HeartCount_2p++;
+    }
+
+    [PunRPC]
+    public void GameEnd()
+    {
+        Score.text = "< Score [ " + Timer.text + " ] >";
+
+        if (HeartCount_1p == 3) GameResult.text = "GameOver - 2P WINS!";
+        else GameResult.text = "GameOver - 1P WINS!";
+        
+        GameOverPanel.GetComponent<Animator>().SetTrigger("MovePanel");
+        GameOver = true;
+    }
+
 }
