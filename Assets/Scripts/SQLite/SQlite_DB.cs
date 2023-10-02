@@ -126,7 +126,8 @@ public class SQlite_DB : MonoBehaviour
             i++;
         }
         DataBaseClose();
-        UImanager_Single.Ranking();
+        if (UImanager_Single != null) UImanager_Single.Ranking();
+        else if (UImanager_Multi != null) UImanager_Multi.Ranking();
     }
 
 }

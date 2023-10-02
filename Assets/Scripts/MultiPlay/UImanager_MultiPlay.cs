@@ -62,7 +62,7 @@ public class UImanager_MultiPlay : MonoBehaviourPun
 
     public void ReStart()
     {
-        PhotonNetwork.LoadLevel("MultiPlayScene");
+        PV.RPC("ReStartMultiPlay", RpcTarget.All);
     }
 
     public void BackTitle()
@@ -115,6 +115,12 @@ public class UImanager_MultiPlay : MonoBehaviourPun
         
         GameOverPanel.GetComponent<Animator>().SetTrigger("MovePanel");
         GameOver = true;
+    }
+
+    [PunRPC]
+    public void ReStartMultiPlay()
+    {
+        PhotonNetwork.LoadLevel("MultiPlayScene");
     }
 
 }

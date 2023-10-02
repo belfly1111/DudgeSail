@@ -49,6 +49,7 @@ MonoBehaviour:
   - DropHeart_1p
   - DropHeart_2p
   - GameEnd
+  - ReStartMultiPlay
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

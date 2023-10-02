@@ -3782,8 +3782,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c803f9a76d1b616418beef99081847cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temp: {fileID: 0}
-  UImanager: {fileID: 644941653}
+  UImanager_Single: {fileID: 644941653}
+  UImanager_Multi: {fileID: 0}
   UserName_inputField: {fileID: 1924144020}
 --- !u!1 &1617378273
 GameObject:
