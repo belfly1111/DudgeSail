@@ -13,12 +13,12 @@ public class UImanager_title : MonoBehaviour
 
     public void playMultiGame()
     {
-
+        SceneManager.LoadScene("MultiPlayLobbyScene");
     }
 
     public void QuitGame()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
 }
