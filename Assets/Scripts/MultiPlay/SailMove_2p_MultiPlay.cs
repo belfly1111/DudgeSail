@@ -15,6 +15,7 @@ public class SailMove_2p_MultiPlay : MonoBehaviourPun
     public UImanager_MultiPlay UImanager_MultiPlay;
     public Animator Animator;
     public bool Isinvincibility = false;
+    public int PlayerSpeed = 3;
     public int life = 3;
 
     void Start()
@@ -28,7 +29,11 @@ public class SailMove_2p_MultiPlay : MonoBehaviourPun
 
     void Update()
     {
-        if(PV.IsMine) playerMove();
+        if (PV.IsMine)
+        {
+            UseBooster();
+            playerMove();
+        }
     }
 
     public void playerMove()
@@ -41,7 +46,21 @@ public class SailMove_2p_MultiPlay : MonoBehaviourPun
             PV.RPC("FlipXRPC", RpcTarget.AllBuffered, axis_width);
         }
 
-        RB.velocity = new Vector2(3 * axis_width, 3 * axis_length);
+        RB.velocity = new Vector2(PlayerSpeed * axis_width, PlayerSpeed * axis_length);
+    }
+
+    public void UseBooster()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            UImanager_MultiPlay.slider.value -= Time.deltaTime;
+            PlayerSpeed = 5;
+        }
+        else
+        {
+            UImanager_MultiPlay.slider.value += Time.deltaTime;
+            PlayerSpeed = 3;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

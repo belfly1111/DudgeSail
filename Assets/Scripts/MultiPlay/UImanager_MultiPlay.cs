@@ -16,6 +16,7 @@ public class UImanager_MultiPlay : MonoBehaviourPun
     public GameObject RankingPanel;
 
     public PhotonView PV;
+    public Slider slider;
     public TMP_Text GameResult;
     public TMP_Text Timer;
     public TMP_Text Score;
