@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 9026548596626589731}
   - component: {fileID: 4210011524588196469}
   - component: {fileID: 9102164573762383572}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1p_Sail
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -170,10 +170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a80317b5bc4344c9d6a82b0ff564e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bullet_1p_prefab: {fileID: 802727747637894360, guid: f45da4b9ca7620e4f821024603d9c828, type: 3}
   PV: {fileID: 9026548596626589731}
   UImanager_MultiPlay: {fileID: 0}
   Animator: {fileID: 6304696561929187023}
   Isinvincibility: 0
+  PlayerSpeed: 3
   life: 3
 --- !u!114 &9026548596626589731
 MonoBehaviour:

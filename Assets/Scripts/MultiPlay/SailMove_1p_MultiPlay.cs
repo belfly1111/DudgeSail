@@ -11,6 +11,7 @@ public class SailMove_1p_MultiPlay : MonoBehaviourPun
 {
     Rigidbody2D RB;
     SpriteRenderer SR;
+    public GameObject Bullet_1p_prefab;
     public PhotonView PV;
     public UImanager_MultiPlay UImanager_MultiPlay;
     public Animator Animator;
@@ -33,6 +34,7 @@ public class SailMove_1p_MultiPlay : MonoBehaviourPun
         {
             UseBooster();
             playerMove();
+            ShootBullet();
         }
     }
 
@@ -63,6 +65,14 @@ public class SailMove_1p_MultiPlay : MonoBehaviourPun
         }
     }
 
+    public void ShootBullet()
+    {
+        if(Input.GetKey(KeyCode.Mouse0))
+        {
+            PV.RPC("ShootBullet_1p", RpcTarget.All);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Obstacle" && !Isinvincibility && PV.IsMine)
@@ -86,5 +96,14 @@ public class SailMove_1p_MultiPlay : MonoBehaviourPun
     void FlipXRPC(float axis)
     {
         SR.flipX = axis == -1;
+    }
+
+    [PunRPC]
+    void ShootBullet_1p()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 shootDirection = (mousePosition - (Vector2)transform.position).normalized;
+        GameObject bullet = Instantiate(Bullet_1p_prefab, this.transform.position, this.transform.rotation);
+        bullet.GetComponent<Rigidbody2D>().velocity = shootDirection * 3;
     }
 }

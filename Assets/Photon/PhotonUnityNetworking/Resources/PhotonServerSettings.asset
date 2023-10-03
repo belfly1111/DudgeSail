@@ -51,6 +51,7 @@ MonoBehaviour:
   - GameEnd
   - ReStartMultiPlay
   - UnderAttack
+  - ShootBullet_1p
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
