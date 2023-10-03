@@ -7,7 +7,7 @@ public class Bullet_Multi : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Wall")
+        if(collision.tag == "Wall" || collision.tag == "Player")
         {
             Destroy(gameObject);
         }
