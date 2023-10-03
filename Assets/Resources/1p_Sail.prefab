@@ -175,6 +175,7 @@ MonoBehaviour:
   UImanager_MultiPlay: {fileID: 0}
   Animator: {fileID: 6304696561929187023}
   Isinvincibility: 0
+  IsReCharge: 0
   PlayerSpeed: 3
   life: 3
 --- !u!114 &9026548596626589731

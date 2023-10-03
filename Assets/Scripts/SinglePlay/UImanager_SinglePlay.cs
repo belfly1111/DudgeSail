@@ -4,14 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Photon.Pun;
 
 public class UImanager_SinglePlay : MonoBehaviour
 {
+    public Slider slider;
     public TMP_Text Timer;
     public TMP_Text Score;
     public GameObject GameOverPanel;
     public GameObject RankingPanel;
     public TMP_Text[] RankingText;
+
+    public Image[] Heart_1p;
+    public int HeartCount_1p = 0;
 
     public int Time_min = 0;
     public float Time_sec = 0;
@@ -38,6 +43,7 @@ public class UImanager_SinglePlay : MonoBehaviour
 
     public void GameEnd()
     {
+
         Score.text = "< Score [ " + Timer.text + " ] >";
         GameOverPanel.GetComponent<Animator>().SetTrigger("MovePanel");
     }
@@ -63,5 +69,18 @@ public class UImanager_SinglePlay : MonoBehaviour
     public void BackTitle()
     {
         SceneManager.LoadScene("StartScene");
+    }
+
+    public void DropHeart()
+    {
+        if (GameOver == true) return;
+
+        Destroy(Heart_1p[HeartCount_1p]);
+        HeartCount_1p++;
+        if (HeartCount_1p == 3)
+        {
+            GameOver = true;
+            GameEnd();
+        }
     }
 }

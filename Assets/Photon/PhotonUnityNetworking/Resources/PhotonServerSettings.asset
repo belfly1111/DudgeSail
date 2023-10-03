@@ -52,6 +52,7 @@ MonoBehaviour:
   - ReStartMultiPlay
   - UnderAttack
   - ShootBullet_1p
+  - ShootBullet_2p
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

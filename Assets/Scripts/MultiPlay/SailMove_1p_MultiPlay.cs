@@ -16,6 +16,7 @@ public class SailMove_1p_MultiPlay : MonoBehaviourPun
     public UImanager_MultiPlay UImanager_MultiPlay;
     public Animator Animator;
     public bool Isinvincibility = false;
+    public bool IsReCharge = false;
     public int PlayerSpeed = 3;
     public int life = 3;
 
@@ -67,9 +68,9 @@ public class SailMove_1p_MultiPlay : MonoBehaviourPun
 
     public void ShootBullet()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
+        if(Input.GetKey(KeyCode.Mouse0) && !IsReCharge)
         {
-            PV.RPC("ShootBullet_1p", RpcTarget.All);
+            StartCoroutine(ReChargeShot());
         }
     }
 
@@ -91,6 +92,15 @@ public class SailMove_1p_MultiPlay : MonoBehaviourPun
         Isinvincibility = false;
     }
 
+    IEnumerator ReChargeShot()
+    {
+        PV.RPC("ShootBullet_1p", RpcTarget.All);
+        UImanager_MultiPlay.ReadyToFire.enabled = false;
+        IsReCharge = true;
+        yield return new WaitForSeconds(2f);
+        UImanager_MultiPlay.ReadyToFire.enabled = true;
+        IsReCharge = false;
+    }
 
     [PunRPC]
     void FlipXRPC(float axis)
@@ -104,6 +114,6 @@ public class SailMove_1p_MultiPlay : MonoBehaviourPun
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 shootDirection = (mousePosition - (Vector2)transform.position).normalized;
         GameObject bullet = Instantiate(Bullet_1p_prefab, this.transform.position, this.transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = shootDirection * 3;
+        bullet.GetComponent<Rigidbody2D>().velocity = shootDirection * 6;
     }
 }

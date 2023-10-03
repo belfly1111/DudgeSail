@@ -170,10 +170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75aff5d2ea7d494db3af5217c94d5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bullet_2p_prefab: {fileID: 5835650643593414643, guid: 4e164f40598d20349a516a0f4ebe41e1, type: 3}
   PV: {fileID: 7922419796724651653}
   UImanager_MultiPlay: {fileID: 0}
   Animator: {fileID: 6074319058630264964}
   Isinvincibility: 0
+  IsReCharge: 0
   PlayerSpeed: 3
   life: 3
 --- !u!114 &7922419796724651653

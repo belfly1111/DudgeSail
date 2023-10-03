@@ -24,6 +24,7 @@ public class UImanager_MultiPlay : MonoBehaviourPun
 
     public Image[] Heart_1p;
     public Image[] Heart_2p;
+    public Image ReadyToFire;
 
     public int HeartCount_1p = 0;
     public int HeartCount_2p = 0;

@@ -20,12 +20,6 @@ public class BulletDispensor : MonoBehaviour
 
             bullet.GetComponent<Rigidbody2D>().velocity = direction * 3f;
             curTime = 0;
-            StartCoroutine(BulletLifetime(bullet));
         }
-    }
-    IEnumerator BulletLifetime(GameObject bullet)
-    {
-        yield return new WaitForSeconds(5f);
-        Destroy(bullet);
     }
 }
